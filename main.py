@@ -12,6 +12,7 @@ while update:
 
     if op == "1":
         fun.guardar_mensaje()
+        fun.cifrado("mensaje.txt")
     #elif op == "2":
         
     #elif op == "3":
@@ -19,4 +20,4 @@ while update:
     elif op == "4":
         update = False
     else:
-        print("Opcion no valida")
+        print("Opcion no valida \n")
