@@ -12,7 +12,8 @@ while update:
 
     if op == "1":
         fun.guardar_mensaje()
-        fun.cifrado("mensaje.txt")
+        fun.min_mayus("mensaje.txt")
+        fun.diccionarios()
     #elif op == "2":
         
     #elif op == "3":
