@@ -6,7 +6,7 @@ from const import ROTOR_ESTANDAR_CONFIGURACION
 rotores=[]
 
 def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspondiente
-    print("Por favor no utilize acentos")
+    print("Por favor no utilice acentos")
     user_input = input("Mensaje a encriptar: ")
     with open(MENSAJE_FILE, "w") as mens:
         mens.write(user_input)
@@ -31,7 +31,7 @@ def min_mayus(archivo): #Funcion para poner en mayusculas y agrupar en grupos de
                             cifr.write(" ")
                             separador = 0
 
-def diccionarios():
+def diccionarios(): #Funcion para convertir los txt de los rotores en diccionarios
     dic_rot_1 = {}
     dic_rot_2 = {}
     dic_rot_3 = {}
@@ -74,10 +74,12 @@ def diccionarios():
             dic_rot_3[contador] = i
             contador += 1  
 
-    print(dic_rot_3)
+    print(dic_rot_3) 
 
-
-
+def cifrado(archivo):
+    with open(CIFRADO_FILE, "r") as cifr:
+        for pack in cifr:
+            paquetes = pack
 
 
 
@@ -86,7 +88,7 @@ def diccionarios():
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
 
-def cargar_rotores():
+def cargar_rotores(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
     global rotores
     rotores=[]
 
