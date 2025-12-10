@@ -8,7 +8,6 @@ dic_rot_1 = {}
 dic_rot_2 = {}
 dic_rot_3 = {}
 
-
 def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspondiente
     print("Por favor no utilice acentos")
     user_input = input("Mensaje a encriptar: ")
@@ -73,7 +72,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
             dic_rot_3[contador] = posicion_letra
             contador += 1
 
-def cifrado(archivo):
+def cifrado(archivo): #Funcion para cifrar el contenido del archivo Cifrado.txt y reescribirlo en el mismo sitio
     separador = 0
     max_letras = 4
 
@@ -95,9 +94,9 @@ def cifrado(archivo):
                         separador = 0
         
         print("\n")
-        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)")
+        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)") 
 
-def descifrado(archivo):
+def descifrado(archivo): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en Descifrado.txt
     
     #Cifrado.txt tiene que existir para que esto funcione. poner try except
 
@@ -113,66 +112,87 @@ def descifrado(archivo):
                     descifr.write(dic_rot_1[i])
 
     print("\n")
-    print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras")
-
-
+    print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras") 
 
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
 
-def cargar_rotores(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
-    global rotores
-    rotores=[]
-
-    try:
-       
-        #cargar rotor 1
-        with open(ROTOR_1, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado1 = lineas[0].strip() #el .strip() elimina los caracteres iniciales y finales de una cadena de texto
-            if len(lineas) > 1:                #
-                notch1 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado1,notch1))
-
-        #cargar rotor 2
-        with open(ROTOR_2, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado2 = lineas[0].strip()
-            
-            if len(lineas) > 1:                #
-                notch2 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado2,notch2))
-
-        #cargar rotor 3
-        with open(ROTOR_3, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado3 = lineas[0].strip()
-            if len(lineas) > 1:                #
-                notch3 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado3,notch3))
-
-        return True
-
-    except: 
-        #si no hay rotores 
-        rotores= ROTOR_ESTANDAR_CONFIGURACION[:] # esto es el slicing
-
-        return True
-        
-
+def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
     
-     
+    try:
+     #cargar rotor 1
+        print("Para configurar el rotor 1 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 1: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:
+                with open(ROTOR_1, "w") as rot1:
+                    rot1.write(user_input.upper())
+            else:
+                print("Faltan letras")
 
+        with open(ROTOR_1, "a") as rot1:
+            rot1.write("\n")
 
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_1, "a") as rot1:
+            rot1.write(user_input.upper())
 
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_1.txt")
 
+    return True
+
+def cargar_rotor_2():
+    try:
+     #cargar rotor 2
+        print("Para configurar el rotor 2 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 2: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:
+                with open(ROTOR_2, "w") as rot2:
+                    rot2.write(user_input)
+            else:
+                print("Faltan letras")
+
+        with open(ROTOR_2, "a") as rot2:
+            rot2.write("\n")
+
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_2, "a") as rot2:
+            rot2.write(user_input.upper())
+
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_2.txt")
+
+    return True
+
+def cargar_rotor_3():
+    try:
+     #cargar rotor 3
+        print("Para configurar el rotor 3 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 3: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:    
+                with open(ROTOR_3, "w") as rot3:
+                    rot3.write(user_input)
+            else:
+                print("Faltan letras")
+
+        with open(ROTOR_3, "a") as rot3:
+            rot3.write("\n")
+
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_3, "a") as rot3:
+            rot3.write(user_input.upper())
+
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_3.txt")
+
+    return True
