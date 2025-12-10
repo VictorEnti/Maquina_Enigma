@@ -2,12 +2,12 @@ ALFABETO = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 LONGITUD_ALFABETO = 26
 
 # Nombres de archivos
-ROTOR_1 = "Rotor_1.txt"  
-ROTOR_2 = "Rotor_2.txt"
-ROTOR_3 = "Rotor_3.txt"
-MENSAJE_FILE = "Mensaje.txt"
-CIFRADO_FILE = "Cifrado.txt"
-DESCIFRADO_FILE = "Descifrado.txt"
+ROTOR_1 = "Rotores\Rotor_1.txt"  
+ROTOR_2 = "Rotores\Rotor_2.txt"
+ROTOR_3 = "Rotores\Rotor_3.txt"
+MENSAJE_FILE = "Mensajes\Mensaje.txt"
+CIFRADO_FILE = "Mensajes\Cifrado.txt"
+DESCIFRADO_FILE = "Mensajes\Descifrado.txt"
 
 # Configuración por defecto de rotores
 ROTOR_ESTANDAR_CONFIGURACION = [
