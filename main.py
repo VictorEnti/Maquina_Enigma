@@ -10,13 +10,14 @@ while update:
     print("4. Salir")
     op = input("> ")
 
+    fun.diccionarios()
+
     if op == "1":
         fun.guardar_mensaje()
         fun.min_mayus("mensaje.txt")
-        fun.diccionarios()
         fun.cifrado("mensaje.txt")
-    #elif op == "2":
-        
+    elif op == "2":
+        fun.descifrado("cifrado.txt")
     #elif op == "3":
         
     elif op == "4":

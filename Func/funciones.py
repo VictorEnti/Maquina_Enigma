@@ -93,8 +93,28 @@ def cifrado(archivo):
                         cifr.write(dic_rot_3[i])
                         cifr.write(" ")
                         separador = 0
-                
-        print(f"[OK] Mensaje cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)")
+        
+        print("\n")
+        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)")
+
+def descifrado(archivo):
+    
+    #Cifrado.txt tiene que existir para que esto funcione. poner try except
+
+    with open(CIFRADO_FILE, "r") as cifr:
+        for pack in cifr:
+            paquetes = pack
+    
+    with open(DESCIFRADO_FILE, "w") as descifr:
+        for letras in paquetes:
+            for i in range(len(ALFABETO)):
+                if dic_rot_3[i] == letras:
+                    let_rot_2 = dic_rot_3[i]
+                    descifr.write(dic_rot_1[i])
+
+    print("\n")
+    print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras")
+
 
 
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
