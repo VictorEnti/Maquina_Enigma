@@ -1,4 +1,4 @@
-import funciones as fun
+import Func.funciones as fun
 
 update = True
 
@@ -14,6 +14,7 @@ while update:
         fun.guardar_mensaje()
         fun.min_mayus("mensaje.txt")
         fun.diccionarios()
+        fun.cifrado("mensaje.txt")
     #elif op == "2":
         
     #elif op == "3":

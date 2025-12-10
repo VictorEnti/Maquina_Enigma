@@ -1,9 +1,12 @@
-from const import ALFABETO, CIFRADO_FILE, LONGITUD_ALFABETO, MENSAJE_FILE
-from const import ROTOR_1, ROTOR_2, ROTOR_3, MENSAJE_FILE,CIFRADO_FILE,DESCIFRADO_FILE
-from const import MENSAJES_OK,MENSAJES_ERROR
-from const import ROTOR_ESTANDAR_CONFIGURACION
+from Func.const import ALFABETO, CIFRADO_FILE, LONGITUD_ALFABETO, MENSAJE_FILE
+from Func.const import ROTOR_1, ROTOR_2, ROTOR_3, MENSAJE_FILE,CIFRADO_FILE,DESCIFRADO_FILE
+from Func.const import MENSAJES_OK,MENSAJES_ERROR
+from Func.const import ROTOR_ESTANDAR_CONFIGURACION
 
 rotores=[]
+dic_rot_1 = {}
+dic_rot_2 = {}
+dic_rot_3 = {}
 
 def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspondiente
     print("Por favor no utilice acentos")
@@ -32,10 +35,7 @@ def min_mayus(archivo): #Funcion para poner en mayusculas y agrupar en grupos de
                             separador = 0
 
 def diccionarios(): #Funcion para convertir los txt de los rotores en diccionarios
-    dic_rot_1 = {}
-    dic_rot_2 = {}
-    dic_rot_3 = {}
-
+    
     with open(ROTOR_1, "r") as rot1:
         lineas_rotor = rot1.readlines(1)
         contador = 0
@@ -47,7 +47,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
         for i in letras_rotor:
             dic_rot_1[contador] = i
             contador += 1    
-    print(dic_rot_1)
+    print(dic_rot_1)    
 
     with open(ROTOR_2, "r") as rot2:
         lineas_rotor = rot2.readlines(1)
@@ -74,16 +74,26 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
             dic_rot_3[contador] = i
             contador += 1  
 
-    print(dic_rot_3) 
+    print(dic_rot_3)
+
+    return dic_rot_1
+    return dic_rot_2
+    return dic_rot_3
 
 def cifrado(archivo):
     with open(CIFRADO_FILE, "r") as cifr:
         for pack in cifr:
             paquetes = pack
 
+    for clave in paquetes:
+        for i in range (len(dic_rot_1)):
+            if dic_rot_1.get(i) == clave:
+                print(i)
+                #with open(CIFRADO_FILE, "w") as cifr:
+                   # cifr.write(i)
+                
 
-
-
+#Crear carpetas
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
