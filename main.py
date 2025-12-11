@@ -16,7 +16,8 @@ while update:
     print("2. Descrifrar mensaje")
     print("3. Editar rotores")
     print("4. Salir")
-    op = input("Seleccione una opcion:  \n")
+    op = input("Seleccione una opcion:  ")
+    print("\n")
 
     fun.diccionarios()
 
