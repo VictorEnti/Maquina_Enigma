@@ -1,7 +1,7 @@
-from Func.const import ALFABETO, CIFRADO_FILE, LONGITUD_ALFABETO, MENSAJE_FILE
+from Func.const import ALFABETO, CIFRADO_FILE, CONFIGURACION_ESTANDAR_ROTOR, LONGITUD_ALFABETO, MENSAJE_FILE
 from Func.const import ROTOR_1, ROTOR_2, ROTOR_3, MENSAJE_FILE,CIFRADO_FILE,DESCIFRADO_FILE
 from Func.const import MENSAJES_OK,MENSAJES_ERROR
-from Func.const import ROTOR_ESTANDAR_CONFIGURACION
+from Func.const import CONFIGURACION_ESTANDAR_ROTOR
 
 rotores=[]
 dic_rot_1 = {}
@@ -9,6 +9,7 @@ dic_rot_2 = {}
 dic_rot_3 = {}
 
 def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspondiente
+    print("-----------CIFRADO-----------")
     print("Por favor no utilice acentos")
     user_input = input("Mensaje a encriptar: ")
     with open(MENSAJE_FILE, "w") as mens:
@@ -33,6 +34,23 @@ def min_mayus(archivo): #Funcion para poner en mayusculas y agrupar en grupos de
                             cifr.write(letra)
                             cifr.write(" ")
                             separador = 0
+
+def precargar_dic(): #Funcion que carga una configuracion preestablecida de los 3 rotores
+
+    with open(ROTOR_1, "w") as rot1:
+        rot1.write(CONFIGURACION_ESTANDAR_ROTOR[0][0])
+        rot1.write("\n")
+        rot1.write(CONFIGURACION_ESTANDAR_ROTOR[0][1])
+    
+    with open(ROTOR_2, "w") as rot2:
+        rot2.write(CONFIGURACION_ESTANDAR_ROTOR[1][0])
+        rot2.write("\n")
+        rot2.write(CONFIGURACION_ESTANDAR_ROTOR[1][1])
+    
+    with open(ROTOR_3, "w") as rot3:
+        rot3.write(CONFIGURACION_ESTANDAR_ROTOR[2][0])
+        rot3.write("\n")
+        rot3.write(CONFIGURACION_ESTANDAR_ROTOR[2][1])
 
 def diccionarios(): #Funcion para convertir los txt de los rotores en diccionarios
 
@@ -96,8 +114,7 @@ def cifrado(archivo): #Funcion para cifrar el contenido del archivo Cifrado.txt 
                         cifr.write(" ")
                         separador = 0
         
-        print("\n")
-        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)") 
+        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)")
 
 def descifrado(archivo): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en Descifrado.txt
     
@@ -114,31 +131,34 @@ def descifrado(archivo): #Funcion para descifrar el archivo Cifrado.txt y escrib
                     let_rot_2 = dic_rot_3[i]
                     descifr.write(dic_rot_1[i])
 
-    print("\n")
     print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras") 
 
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
 
-def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
-    
+def cargar_rotor_1(): #Funciones para sobreescribir los rotores y poner combinaciones nuevas
     try:
      #cargar rotor 1
-        print("Para configurar el rotor 1 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
+        print("\n")
+        print("Para configurar el rotor 1 inserte la siguiente \ncadena en orden aleatorio y sin repeticiones:")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 1: ")
         long_correcta = True
         while long_correcta == True:
             if len(user_input) == LONGITUD_ALFABETO:
-                #if user_input.upper() in ALFABETO:
-                    with open(ROTOR_1, "w") as rot1:
-                        rot1.write(user_input.upper())
-                        long_correcta = False
-                        print("Rotor 1 cambiado\n")
-                #else:
-                    #print("Hay letras repetidas")
-                    #user_input = input("Rotor 1: ")
+                for letra in user_input:
+                    veces = 0
+                    for x in user_input:
+                        if letra == x:
+                            veces += 1
+                            if veces == 2:
+                                print("Hay letras repetidas")
+                                user_input = input("Rotor 1: ")    
+                    else:    
+                        with open(ROTOR_1, "w") as rot1:
+                            rot1.write(user_input.upper())
+                            long_correcta = False                           
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
                 user_input = input("Rotor 1: ")
@@ -151,6 +171,7 @@ def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinacio
         if len(user_input) == 1:
             with open(ROTOR_1, "a") as rot1:
                 rot1.write(user_input.upper())
+                print("Rotor 1 cambiado\n")
         else:
             print("Solo una letra")
 
@@ -162,19 +183,28 @@ def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinacio
 def cargar_rotor_2():
     try:
      #cargar rotor 2
-        print("Para configurar el rotor 2 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
+        print("\n")
+        print("Para configurar el rotor 2 inserte la siguiente \ncadena en orden aleatorio y sin repeticiones:")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 2: ")
         long_correcta = True
         while long_correcta == True:
-            if len(user_input) >= LONGITUD_ALFABETO:
-                with open(ROTOR_2, "w") as rot2:
-                    rot2.write(user_input.upper())
-                    long_correcta = False
-                    print("Rotor 2 cambiado\n")
+            if len(user_input) == LONGITUD_ALFABETO:
+                for letra in user_input:
+                    veces = 0
+                    for x in user_input:
+                        if letra == x:
+                            veces += 1
+                            if veces == 2:
+                                print("Hay letras repetidas")
+                                user_input = input("Rotor 2: ")    
+                    else:    
+                        with open(ROTOR_2, "w") as rot2:
+                            rot2.write(user_input.upper())
+                            long_correcta = False
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
-                user_input = input("Rotor 2: ")
+                user_input = input("Rotor 1: ")
 
         with open(ROTOR_2, "a") as rot2:
             rot2.write("\n")
@@ -184,6 +214,7 @@ def cargar_rotor_2():
         if len(user_input) == 1:
             with open(ROTOR_2, "a") as rot2:
                 rot2.write(user_input.upper())
+                print("Rotor 2 cambiado\n")
         else:
             print("Solo una letra")
 
@@ -195,19 +226,28 @@ def cargar_rotor_2():
 def cargar_rotor_3():
     try:
      #cargar rotor 3
-        print("Para configurar el rotor 3 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
+        print("\n")
+        print("Para configurar el rotor 3 inserte la siguiente \ncadena en orden aleatorio y sin repeticiones:")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 3: ")
         long_correcta = True
         while long_correcta == True:
-            if len(user_input) >= LONGITUD_ALFABETO:    
-                with open(ROTOR_3, "w") as rot3:
-                    rot3.write(user_input.upper())
-                    long_correcta = False
-                    print("Rotor 3 cambiado\n")
+            if len(user_input) == LONGITUD_ALFABETO:
+                for letra in user_input:
+                    veces = 0
+                    for x in user_input:
+                        if letra == x:
+                            veces += 1
+                            if veces == 2:
+                                print("Hay letras repetidas")
+                                user_input = input("Rotor 3: ")    
+                    else:    
+                        with open(ROTOR_3, "w") as rot3:
+                            rot3.write(user_input.upper())
+                            long_correcta = False
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
-                user_input = input("Rotor 3: ")
+                user_input = input("Rotor 1: ")
 
         with open(ROTOR_3, "a") as rot3:
             rot3.write("\n")
@@ -217,6 +257,7 @@ def cargar_rotor_3():
         if len(user_input) == 1:
             with open(ROTOR_3, "a") as rot3:
                 rot3.write(user_input.upper())
+                print("Rotor 3 cambiado\n")
         else:
             print("Solo una letra")
 

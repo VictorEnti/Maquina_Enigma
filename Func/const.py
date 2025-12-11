@@ -10,13 +10,14 @@ CIFRADO_FILE = "Mensajes\Cifrado.txt"
 DESCIFRADO_FILE = "Mensajes\Descrifrado.txt"
 
 # Configuración por defecto de rotores
-ROTOR_ESTANDAR_CONFIGURACION = [
+CONFIGURACION_ESTANDAR_ROTOR = [
     ("FNHCORPGZYWJAMDSLBUVQTKXIE", "P"),  # Rotor 1 
     ("VLZJMXTBSGEQKIYCROFWHAPNUD", "C"),  # Rotor 2 
     ("PSWGKQAHUFZORLVETDJYCBMNIX", "G")   # Rotor 3
 ]
 
-#Aqui pongo las constantes de los Errores que se pueden generar a lo largo del programa en la logica try/except, tenemos que importar const en los demas archivos para poder usar los errores de las constantes.
+#Aqui pongo las constantes de los Errores que se pueden generar a lo largo del programa en la logica try/except, 
+#tenemos que importar const en los demas archivos para poder usar los errores de las constantes.
 MENSAJES_OK = {
     "cifrado": "[OK] Mensaje cifrado en '{file}' ({lletres} letras, {grups} grupos de 5)",
     "descifrado": "[OK] Mensaje cifrado en '{file}'",
@@ -38,4 +39,3 @@ MENSAJES_ERROR = {
 #resultado: "[OK] guardado en 'cifrado.txt'"
 
 #asi evitamos repetir el texto y que sea redundandte
-
