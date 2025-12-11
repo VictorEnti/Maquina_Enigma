@@ -17,7 +17,7 @@ def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspo
 def min_mayus(archivo): #Funcion para poner en mayusculas y agrupar en grupos de 5
     separador = 0
     max_letras = 4
-
+    
     with open(MENSAJE_FILE) as mens:
         with open(CIFRADO_FILE, "w") as cifr:
             for mens_original in mens:
@@ -35,121 +35,164 @@ def min_mayus(archivo): #Funcion para poner en mayusculas y agrupar en grupos de
                             separador = 0
 
 def diccionarios(): #Funcion para convertir los txt de los rotores en diccionarios
-    
+
     with open(ROTOR_1, "r") as rot1:
         lineas_rotor = rot1.readlines(1)
         contador = 0
 
-        for x in lineas_rotor:
-            l_rotor = x
+        for linea in lineas_rotor:
+            l_rotor = linea
             letras_rotor = l_rotor.replace("\n", "")
 
-        for i in letras_rotor:
-            dic_rot_1[contador] = i
+        for posicion_letra in letras_rotor:
+            dic_rot_1[contador] = posicion_letra
             contador += 1    
-    print(dic_rot_1)    
 
     with open(ROTOR_2, "r") as rot2:
         lineas_rotor = rot2.readlines(1)
         contador = 0
 
-        for x in lineas_rotor:
-            l_rotor = x
+        for linea in lineas_rotor:
+            l_rotor = linea
             letras_rotor = l_rotor.replace("\n", "")
 
-        for i in letras_rotor:
-            dic_rot_2[contador] = i
+        for posicion_letra in letras_rotor:
+            dic_rot_2[contador] = posicion_letra
             contador += 1  
-    print(dic_rot_2)
 
     with open(ROTOR_3, "r") as rot3:
         lineas_rotor = rot3.readlines(1)
         contador = 0
 
-        for x in lineas_rotor:
-            l_rotor = x
+        for linea in lineas_rotor:
+            l_rotor = linea
             letras_rotor = l_rotor.replace("\n", "")
 
-        for i in letras_rotor:
-            dic_rot_3[contador] = i
-            contador += 1  
+        for posicion_letra in letras_rotor:
+            dic_rot_3[contador] = posicion_letra
+            contador += 1
 
-    print(dic_rot_3)
+def cifrado(archivo): #Funcion para cifrar el contenido del archivo Cifrado.txt y reescribirlo en el mismo sitio
+    separador = 0
+    max_letras = 4
 
-    return dic_rot_1
-    return dic_rot_2
-    return dic_rot_3
-
-def cifrado(archivo):
     with open(CIFRADO_FILE, "r") as cifr:
         for pack in cifr:
             paquetes = pack
+    
+    with open(CIFRADO_FILE, "w") as cifr:
+        for letras in paquetes:
+            for i in range(len(ALFABETO)):
+                if dic_rot_1[i] == letras:
+                    if separador < max_letras:
+                        let_rot_2 = dic_rot_2[i]
+                        cifr.write(dic_rot_3[i])
+                        separador += 1
+                    elif separador == max_letras:    
+                        cifr.write(dic_rot_3[i])
+                        cifr.write(" ")
+                        separador = 0
+        
+        print("\n")
+        print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)") 
 
-    for clave in paquetes:
-        for i in range (len(dic_rot_1)):
-            if dic_rot_1.get(i) == clave:
-                print(i)
-                #with open(CIFRADO_FILE, "w") as cifr:
-                   # cifr.write(i)
-                
+def descifrado(archivo): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en Descifrado.txt
+    
+    #Cifrado.txt tiene que existir para que esto funcione. poner try except
 
-#Crear carpetas
+    with open(CIFRADO_FILE, "r") as cifr:
+        for pack in cifr:
+            paquetes = pack
+    
+    with open(DESCIFRADO_FILE, "w") as descifr:
+        for letras in paquetes:
+            for i in range(len(ALFABETO)):
+                if dic_rot_3[i] == letras:
+                    let_rot_2 = dic_rot_3[i]
+                    descifr.write(dic_rot_1[i])
+
+    print("\n")
+    print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras") 
+
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
 
-def cargar_rotores(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
-    global rotores
-    rotores=[]
-
-    try:
-       
-        #cargar rotor 1
-        with open(ROTOR_1, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado1 = lineas[0].strip() #el .strip() elimina los caracteres iniciales y finales de una cadena de texto
-            if len(lineas) > 1:                #
-                notch1 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado1,notch1))
-
-        #cargar rotor 2
-        with open(ROTOR_2, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado2 = lineas[0].strip()
-            
-            if len(lineas) > 1:                #
-                notch2 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado2,notch2))
-
-        #cargar rotor 3
-        with open(ROTOR_3, 'r') as f:
-            lineas = f.readlines()
-        if len(lineas) >= 1:
-            cableado3 = lineas[0].strip()
-            if len(lineas) > 1:                #
-                notch3 = lineas[1].strip()     # creo que todo esto se puede poner en una linea
-            else:                              #
-                "Z"                            #
-            rotores.append((cableado3,notch3))
-
-        return True
-
-    except: 
-        #si no hay rotores 
-        rotores= ROTOR_ESTANDAR_CONFIGURACION[:] # esto es el slicing
-
-        return True
-        
-
+def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinaciones nuevas
     
-     
+    try:
+     #cargar rotor 1
+        print("Para configurar el rotor 1 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 1: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:
+                with open(ROTOR_1, "w") as rot1:
+                    rot1.write(user_input.upper())
+            else:
+                print("Faltan letras")
 
+        with open(ROTOR_1, "a") as rot1:
+            rot1.write("\n")
 
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_1, "a") as rot1:
+            rot1.write(user_input.upper())
 
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_1.txt")
 
+    return True
+
+def cargar_rotor_2():
+    try:
+     #cargar rotor 2
+        print("Para configurar el rotor 2 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 2: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:
+                with open(ROTOR_2, "w") as rot2:
+                    rot2.write(user_input)
+            else:
+                print("Faltan letras")
+
+        with open(ROTOR_2, "a") as rot2:
+            rot2.write("\n")
+
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_2, "a") as rot2:
+            rot2.write(user_input.upper())
+
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_2.txt")
+
+    return True
+
+def cargar_rotor_3():
+    try:
+     #cargar rotor 3
+        print("Para configurar el rotor 3 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        user_input = input("Rotor 3: ")
+        while len(user_input) >= LONGITUD_ALFABETO:
+            if len(user_input) >= LONGITUD_ALFABETO:    
+                with open(ROTOR_3, "w") as rot3:
+                    rot3.write(user_input)
+            else:
+                print("Faltan letras")
+
+        with open(ROTOR_3, "a") as rot3:
+            rot3.write("\n")
+
+        print("Inserte la letra de salto")
+        user_input = input("Letra de salto: ")
+        with open(ROTOR_3, "a") as rot3:
+            rot3.write(user_input.upper())
+
+    except FileNotFoundError: 
+        print("No se ha encontrado el archivo Rotor_3.txt")
+
+    return True

@@ -8,17 +8,20 @@ while update:
     print("2. Descrifrar mensaje")
     print("3. Editar rotores")
     print("4. Salir")
-    op = input("> ")
+    op = input("Seleccione una opcion:  ")
+
+    fun.diccionarios()
 
     if op == "1":
         fun.guardar_mensaje()
         fun.min_mayus("mensaje.txt")
-        fun.diccionarios()
         fun.cifrado("mensaje.txt")
-    #elif op == "2":
-        
-    #elif op == "3":
-        
+    elif op == "2":
+        fun.descifrado("cifrado.txt")
+    elif op == "3":
+        fun.cargar_rotor_1()
+        fun.cargar_rotor_2()
+        fun.cargar_rotor_3()
     elif op == "4":
         update = False
     else:
