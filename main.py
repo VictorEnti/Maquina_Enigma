@@ -16,7 +16,7 @@ while update:
     print("2. Descrifrar mensaje")
     print("3. Editar rotores")
     print("4. Salir")
-    op = input("Seleccione una opcion:  ")
+    op = input("Seleccione una opcion:  \n")
 
     fun.diccionarios()
 
@@ -32,8 +32,10 @@ while update:
             while actualizado:
                 if elegir_rotor =="1":
                     fun.cargar_rotor_1()
+                    actualizado=False
                 elif elegir_rotor=="2":
                     fun.cargar_rotor_2()
+                    actualizado=False
                 elif elegir_rotor=="3":
                     fun.cargar_rotor_3()
                     actualizado=False

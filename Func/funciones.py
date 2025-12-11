@@ -131,9 +131,14 @@ def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinacio
         long_correcta = True
         while long_correcta == True:
             if len(user_input) == LONGITUD_ALFABETO:
-                with open(ROTOR_1, "w") as rot1:
-                    rot1.write(user_input.upper())
-                    long_correcta = False
+                #if user_input.upper() in ALFABETO:
+                    with open(ROTOR_1, "w") as rot1:
+                        rot1.write(user_input.upper())
+                        long_correcta = False
+                        print("Rotor cambiado\n")
+                #else:
+                    #print("Hay letras repetidas")
+                    #user_input = input("Rotor 1: ")
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
                 user_input = input("Rotor 1: ")
@@ -166,6 +171,7 @@ def cargar_rotor_2():
                 with open(ROTOR_2, "w") as rot2:
                     rot2.write(user_input.upper())
                     long_correcta = False
+                    print("Rotor cambiado\n")
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
                 user_input = input("Rotor 2: ")
@@ -198,6 +204,7 @@ def cargar_rotor_3():
                 with open(ROTOR_3, "w") as rot3:
                     rot3.write(user_input.upper())
                     long_correcta = False
+                    print("Rotor cambiado\n")
             else:
                 print(f"Faltan {26 - len(user_input)} letras")
                 user_input = input("Rotor 3: ")
