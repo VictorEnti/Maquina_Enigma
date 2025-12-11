@@ -39,6 +39,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
     with open(ROTOR_1, "r") as rot1:
         lineas_rotor = rot1.readlines(1)
         contador = 0
+        letras_rotor = ""
 
         for linea in lineas_rotor:
             l_rotor = linea
@@ -51,6 +52,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
     with open(ROTOR_2, "r") as rot2:
         lineas_rotor = rot2.readlines(1)
         contador = 0
+        letras_rotor = ""
 
         for linea in lineas_rotor:
             l_rotor = linea
@@ -63,6 +65,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
     with open(ROTOR_3, "r") as rot3:
         lineas_rotor = rot3.readlines(1)
         contador = 0
+        letras_rotor = ""
 
         for linea in lineas_rotor:
             l_rotor = linea
@@ -122,23 +125,29 @@ def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinacio
     
     try:
      #cargar rotor 1
-        print("Para configurar el rotor 1 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("Para configurar el rotor 1 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 1: ")
-        while len(user_input) >= LONGITUD_ALFABETO:
-            if len(user_input) >= LONGITUD_ALFABETO:
+        long_correcta = True
+        while long_correcta == True:
+            if len(user_input) == LONGITUD_ALFABETO:
                 with open(ROTOR_1, "w") as rot1:
                     rot1.write(user_input.upper())
+                    long_correcta = False
             else:
-                print("Faltan letras")
+                print(f"Faltan {26 - len(user_input)} letras")
+                user_input = input("Rotor 1: ")
 
         with open(ROTOR_1, "a") as rot1:
             rot1.write("\n")
 
-        print("Inserte la letra de salto")
+        print("\nInserte la letra de salto")
         user_input = input("Letra de salto: ")
-        with open(ROTOR_1, "a") as rot1:
-            rot1.write(user_input.upper())
+        if len(user_input) == 1:
+            with open(ROTOR_1, "a") as rot1:
+                rot1.write(user_input.upper())
+        else:
+            print("Solo una letra")
 
     except FileNotFoundError: 
         print("No se ha encontrado el archivo Rotor_1.txt")
@@ -148,23 +157,29 @@ def cargar_rotor_1(): #Funcion para sobreescribir los rotores y poner combinacio
 def cargar_rotor_2():
     try:
      #cargar rotor 2
-        print("Para configurar el rotor 2 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("Para configurar el rotor 2 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 2: ")
-        while len(user_input) >= LONGITUD_ALFABETO:
+        long_correcta = True
+        while long_correcta == True:
             if len(user_input) >= LONGITUD_ALFABETO:
                 with open(ROTOR_2, "w") as rot2:
-                    rot2.write(user_input)
+                    rot2.write(user_input.upper())
+                    long_correcta = False
             else:
-                print("Faltan letras")
+                print(f"Faltan {26 - len(user_input)} letras")
+                user_input = input("Rotor 2: ")
 
         with open(ROTOR_2, "a") as rot2:
             rot2.write("\n")
 
-        print("Inserte la letra de salto")
+        print("\nInserte la letra de salto")
         user_input = input("Letra de salto: ")
-        with open(ROTOR_2, "a") as rot2:
-            rot2.write(user_input.upper())
+        if len(user_input) == 1:
+            with open(ROTOR_2, "a") as rot2:
+                rot2.write(user_input.upper())
+        else:
+            print("Solo una letra")
 
     except FileNotFoundError: 
         print("No se ha encontrado el archivo Rotor_2.txt")
@@ -174,23 +189,29 @@ def cargar_rotor_2():
 def cargar_rotor_3():
     try:
      #cargar rotor 3
-        print("Para configurar el rotor 3 inserte la siguiente cadena en\n orden aleatorio y sin repeticiones")
+        print("Para configurar el rotor 3 inserte la siguiente cadena en\norden aleatorio y sin repeticiones")
         print("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         user_input = input("Rotor 3: ")
-        while len(user_input) >= LONGITUD_ALFABETO:
+        long_correcta = True
+        while long_correcta == True:
             if len(user_input) >= LONGITUD_ALFABETO:    
                 with open(ROTOR_3, "w") as rot3:
-                    rot3.write(user_input)
+                    rot3.write(user_input.upper())
+                    long_correcta = False
             else:
-                print("Faltan letras")
+                print(f"Faltan {26 - len(user_input)} letras")
+                user_input = input("Rotor 3: ")
 
         with open(ROTOR_3, "a") as rot3:
             rot3.write("\n")
 
-        print("Inserte la letra de salto")
+        print("\nInserte la letra de salto")
         user_input = input("Letra de salto: ")
-        with open(ROTOR_3, "a") as rot3:
-            rot3.write(user_input.upper())
+        if len(user_input) == 1:
+            with open(ROTOR_3, "a") as rot3:
+                rot3.write(user_input.upper())
+        else:
+            print("Solo una letra")
 
     except FileNotFoundError: 
         print("No se ha encontrado el archivo Rotor_3.txt")
