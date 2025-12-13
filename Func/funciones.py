@@ -12,7 +12,7 @@ def guardar_mensaje(): #Funcion para guardar los mensajes en su archivo correspo
     
     try:
         print("-----------CIFRADO-----------")
-        print("Por favor no utilice acentos")
+        print("Por favor no utilice acentos ya que estos no se guardaran")
         user_input = input("Mensaje a encriptar: ")
         with open(MENSAJE_FILE, "w") as mens:
             mens.write(user_input)
@@ -160,6 +160,7 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
 def cifrado(): #Funcion para cifrar el contenido del archivo Cifrado.txt y reescribirlo en el mismo sitio
     separador = 0
     max_letras = 4
+    saltos = 0
 
     try:
         with open(CIFRADO_FILE, "r") as cifr:
@@ -172,12 +173,29 @@ def cifrado(): #Funcion para cifrar el contenido del archivo Cifrado.txt y reesc
                     if dic_rot_1[i] == letras:
                         if separador < max_letras:
                             let_rot_2 = dic_rot_2[i]
-                            cifr.write(dic_rot_3[i])
-                            separador += 1
+                            if (i + saltos) >= 26:
+                                pos_letra = ((i + saltos) - 26)
+                                cifr.write(dic_rot_3[pos_letra])
+                            else:
+                                pos_letra2 = (i + saltos)
+                                cifr.write(dic_rot_3[pos_letra2])
+                            if saltos == 26:
+                                saltos = 0
+                            separador += 1                       
+                        
                         elif separador == max_letras:    
-                            cifr.write(dic_rot_3[i])
+                            if (i + saltos) >= 26:
+                                pos_letra3 = ((i + saltos) - 26)
+                                cifr.write(dic_rot_3[pos_letra3])
+                            else:
+                                pos_letra4 = (i + saltos)
+                                cifr.write(dic_rot_3[pos_letra4])
+                            if saltos == 26:
+                                saltos = 0                           
                             cifr.write(" ")
                             separador = 0
+                        print(i, saltos, i+saltos, dic_rot_3[i])
+                        saltos += 1
             
             print(f"[OK] Mensaje Cifrado en cifrado.txt, {len(paquetes)} letras, {len(paquetes)//5} packs de 5 letras (aprox)")
 
@@ -187,9 +205,14 @@ def cifrado(): #Funcion para cifrar el contenido del archivo Cifrado.txt y reesc
     except FileExistsError:
         print("Archivo corrupto")
         return False
+    except UnboundLocalError:
+        print("Mensaje vacio, por favor inserte el mensaje a encriptar")
+        return False
 
 def descifrado(): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en Descifrado.txt
     
+    saltos = 0
+
     try:
         with open(CIFRADO_FILE, "r") as cifr:
             for pack in cifr:
@@ -207,10 +230,17 @@ def descifrado(): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en
             for letras in paquetes:
                 for i in range(len(ALFABETO)):
                     if dic_rot_3[i] == letras:
-                        let_rot_2 = dic_rot_3[i]
-                        descifr.write(dic_rot_1[i])
-
-        print(f"[OK] Mensaje descifrado en Desifrado.txt, {len(paquetes)} letras")
+                        let_rot_2 = dic_rot_2[i]
+                        if (i - saltos) <= -1:
+                            descifr.write(dic_rot_1[((i - saltos) + 26)])
+                        else:
+                            descifr.write(dic_rot_1[i - saltos])
+                        if saltos == 26:
+                            saltos = 0
+                        print(i , saltos, i-saltos)
+                        saltos += 1
+    
+        print(f"[OK] Mensaje descifrado en Descifrado.txt, {len(paquetes)} letras")
     
     except FileNotFoundError:
         print(f"El archivo {DESCIFRADO_FILE} no se ha encontrado")
@@ -218,7 +248,10 @@ def descifrado(): #Funcion para descifrar el archivo Cifrado.txt y escribirlo en
     except FileExistsError:
         print("Archivo corrupto")
         return False
-      
+    except UnboundLocalError:
+        print("Archivo vacio, no se puede ejecutar")
+        return False
+    
 #Funcion que lee los archivos Rotor1.txt, Rotor2.txt, Rotor3.txt
 #por cada rotor guarda el cableado que son 26 letras desordenadas
 #y el notch que es la letra que hace girar el siguiente rotor
