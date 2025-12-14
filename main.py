@@ -31,7 +31,7 @@ while update:
     elif op == "2":
             fun.descifrado()
     elif op == "3":
-            elegir_rotor = input("Elige el rotor (1,2,3) que deseas editar (pulse cualquier otro caracter para salir): ")
+            elegir_rotor = input("Elige el rotor (1,2,3) que deseas editar \n(pulse cualquier otro caracter para salir): ")
             actualizado = True
             while actualizado:
                 if elegir_rotor =="1":
