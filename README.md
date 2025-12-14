@@ -55,6 +55,12 @@ FLUJO DE FUNCIONAMIENTO
 1. Configurar los rotores (este paso es opcional, ya que vienen configurados por defecto)
 2. Cifrar Mensaje: seleccionar opci�n 1, introducir el mensaje y el resultado se guarda en "Cifrado.txt"
 3. Descifrar el mensaje: seleccionar opci�n 2, se descifra "Cifrado.txt" y se guarda en "Descifrado.txt"
+   
+Si la carpeta que guarda los mensajes (Mensajes) no existe el código dará un error diciendo que no se encuentra y no se podra ejecutar
+Si la carpeta que guarda los rotores (Rotores) no existe el código dará un error diciendo que no se encuentra y continuara con la ejeccución
+dando error al no haber letras que utilizar
+
+Los archivos no tienen porque existir ya que hay una funcion que los genera con una serie de letras preconfiguradas
 
 CREAR NUEVOS ROTORES 
 1. Seleccionar opci�n 3 en el men�
