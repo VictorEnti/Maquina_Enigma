@@ -1,92 +1,95 @@
 # Maquina_Enigma
 
-DESCRIPCIÓN 
-Este proyecto consiste en una simulación básica de la Maquina Enigma que fue utilizada durante la segunda Guerra Mundial para cifrara mensajes. Hemos desarrollado un programa con las funciones basicas de tres rotores intercambiales con notches configurables, que nos permite cifrar y descrifrar mensajes de manera flexible. 
+DESCRIPCI�N 
+Este proyecto consiste en una simulaci�n b�sica de la M�quina Enigma que fue utilizada durante la Segunda Guerra Mundial para cifrar mensajes. Hemos desarrollado un programa con las funciones b�sicas de tres rotores intercambiables con notches configurables, lo que permite cifrar y descifrar mensajes de manera flexible. 
 
 OBJETIVOS DEL PROYECTO 
-El objetivo es crear un programa en Python que simule el proceso de cifrado y descrigrado de la maquina, incliyendo: 
-- Configurar y gestionar los tres rotores
+El objetivo es crear un programa en Python que simule el proceso de cifrado y descifrado de la m�quina, incluyendo: 
+- Configuraci�n y gesti�n de los tres rotores
 - Cifrar eligiendo las posiciones iniciales
 - Interfaz de usuario intuitiva por consola
-- Archivos que almacenan los mensajes y las configuraciones
+- Archivos que almacenan los mensajes y las configuraciones de los rotores
 
 FUNCIONALIDADES QUE HEMOS IMPLEMENTADO
-- Menú interactivo con 4 opciones principales
-- Cifrar mensajes
-- Descifrar mensajes
-- Editar los rotores
-- Gestionar los archivos
-- Validar las permutaciones (26 letras únicas A-Z)
+- Men� interactivo con 4 opciones principales:
+   * Cifrar mensajes
+   * Descifrar mensajes
+   * Editar los rotores
+   * Gestionar los archivos
+- Validaci�n de las permutaciones (26 letras �nicas A-Z)
 - Notches para controlar los rotores
 
 DIFICULTADES ENCONTRADAS Y SOLUCIONES 
 
 1. COMPRENDER EL FUNCIONAMIENTO DE ENIGMA
-Entender la logica compleja del giro de los rotores y el cifrado y el descifrado de los mensajes nos supuso un problema que pudimos solucionar gracias a la ayuda de nuestro profesor y el soporte visual de videos de YouTube que encontramos.
+Entender la l�gica compleja del giro de los rotores, del cifrado y del descifrado de los mensajes nos supuso un problema que pudimos solucionar gracias a la ayuda de nuestro profesor y el soporte visual de videos de YouTube que encontramos.
 
-2. VALIDAR PERMUTACIÓNES
-Asegurar que cada rotor tenga exactamente 26 letras únicas. Lo conseguimos solucionar creando las funciones que validaban y revisaban la longitud y la unicidad.
+2. VALIDAR PERMUTACIONES
+Asegurar que cada rotor tenga exactamente 26 letras �nicas. Lo conseguimos solucionar creando las funciones que validaban y revisaban la longitud y la unicidad.
 
-....
+3. CONSEGUIR SIMULAR EL GIRO DE ROTOR
+Hacer que cada letra que cifrase se "moviese" un posici�n adelante el "cifrador" ha sido una de las partes m�s complejas que nos hemos encontrado
 
-METODOLOGÍA DE TRABAJO 
+METODOLOG�A DE TRABAJO 
 
-1.DIVISION DE TAREAS
-Victor Rius se ha enfocado mas en la logica de cifrado/descifrado y gestión de archivos
-Artur Abrahamyan se ha enfocado mas en la interfaz de usuario
+1.DIVISI�N DE TAREAS
+V�ctor se ha enfocado m�s en la l�gica de cifrado/descifrado y gesti�n de archivos
+Artur se ha enfocado m�s en la interfaz de usuario
 
 2.REUNIONES REGULARES
-Ambos haciamos reuniones diarias para sincronizar el progreso, hemos revisado el codigo conjuntamente y hemos usado GitKraken para registrar cada cambio. 
+Hac�amos reuniones diarias para sincronizar el progreso, hemos revisado el c�digo conjuntamente y hemos usado GitKraken para registrar los avances. 
 
 INSTRUCCIONES DE USO 
 
 REQUISITOS PREVIOS: 
 - Pyhton 3.x instalado
-- Acceso de lecutra y escritura en el sistema de archivos
+- Permisos de lectura y escritura en el sistema de archivos
 
-CONFIGUACIÓN: 
+CONFIGURACI�N: 
 1. Clonar el repositorio
 2. Asegurarse de que existen los archivos Rotores y Mensajes
 
-EJECUCIÓN: "python main.py" 
+EJECUCI�N: "python main.py" 
 
 FLUJO DE FUNCIONAMIENTO
+1. Configurar los rotores (este paso es opcional, ya que vienen configurados por defecto)
+2. Cifrar Mensaje: seleccionar opci�n 1, introducir el mensaje y el resultado se guarda en "Cifrado.txt"
+3. Descifrar el mensaje: seleccionar opci�n 2, se descifra "Cifrado.txt" y se guarda en "Descifrado.txt"
+   
+Si la carpeta que guarda los mensajes (Mensajes) no existe el código dará un error diciendo que no se encuentra y no se podra ejecutar
+Si la carpeta que guarda los rotores (Rotores) no existe el código dará un error diciendo que no se encuentra y continuara con la ejeccución
+dando error al no haber letras que utilizar
 
-1. Configruar rotores (este paso es opcional ya que vienen configurados por defecto)
-2. Cifrar Mensaje, seleccionar opcion 1, introducir el mensaje y el resultado se guarda en "Cifrado.txt"
-3. Descifrar el mensaje, seleccionar opcion 2, se descifra "Cifrado.txt" a "Descifrado.txt"
+Los archivos no tienen porque existir ya que hay una funcion que los genera con una serie de letras preconfiguradas
 
 CREAR NUEVOS ROTORES 
-1. Seleccionar opcion 3 en el menú
+1. Seleccionar opci�n 3 en el men�
 2. Elegir rotor que queremos editar(1,2 o 3) 
-3. Introducir 26 letras únicas en cualquier orden
+3. Introducir 26 letras �nicas en cualquier orden
 4. Especificar letras del notch
 
 EJEMPLO DE USO: 
-texto : Hola Victor guapo
+Mensaje : Hola V�ctor guapo
 
 PROCESOS
-1. Normalización: HOLAVICTORGUAPO
-2. Agrupación: HOLAV ICTOR GUAPO
-3. Cifrado: Depende de la configuración de los rotores
+1. Normalizaci�n: HOLAVICTORGUAPO
+2. Agrupaci�n: HOLAV ICTOR GUAPO
+3. Cifrado: Depende de la configuraci�n de los rotores
 4. Descifrado: Devuelve el mensaje original
 
 LIMITACIONES 
-1. Caracteres especiales se eliminan
-2. Acentos no estan permitidos
-3. Los esapcios solo se preservan en la agrupación final
-4. Todo el texto de coniverte en mayúsculas
+1. Los caracteres especiales se eliminan
+2. Acentos no est�n permitidos
+3. Los espacios solo se preservan en el mensaje original
+4. Todo el texto se convierte en may�sculas
 
 POSIBLES MEJORAS FUTURAS 
 
 ALTA PRIORIDAD
-1. Implementar el Reflector
-2. Añadir tablero de conexiones
+1. Implementar el reflector
+2. A�adir tablero de conexiones
 3. Permitir el intercambio de orden de los rotores
 
 PRIORIDAD MEDIA 
-1. Interfaz gráfica de usuario
+1. Interfaz gr�fica de usuario
 2. Historial de configuraciones
-   
-
-
