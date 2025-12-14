@@ -7,7 +7,7 @@ ROTOR_2 = "Rotores\Rotor_2.txt"
 ROTOR_3 = "Rotores\Rotor_3.txt"
 MENSAJE_FILE = "Mensajes\Mensaje.txt"
 CIFRADO_FILE = "Mensajes\Cifrado.txt"
-DESCIFRADO_FILE = "Mensajes\Descrifrado.txt"
+DESCIFRADO_FILE = "Mensajes\Descifrado.txt"
 
 # Configuración por defecto de rotores
 CONFIGURACION_ESTANDAR_ROTOR = [

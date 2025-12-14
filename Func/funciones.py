@@ -1,6 +1,7 @@
 from Func.const import ALFABETO, LONGITUD_ALFABETO, CONFIGURACION_ESTANDAR_ROTOR
 from Func.const import ROTOR_1, ROTOR_2, ROTOR_3, MENSAJE_FILE, CIFRADO_FILE, DESCIFRADO_FILE
 from Func.const import MENSAJES_OK,MENSAJES_ERROR
+from re import search
 
 rotores=[]
 dic_rot_1 = {}
@@ -93,6 +94,8 @@ def precargar_dic(): #Funcion que carga una configuracion preestablecida de los 
 
 def diccionarios(): #Funcion para convertir los txt de los rotores en diccionarios
 
+    print("Por favor utilice solo una letra \nNumeros o mas de una letra daran error")
+
     try:
         with open(ROTOR_1, "r") as rot1:                                            #Abre el archivo del rotor
             lineas_rotor = rot1.readlines(1)                                        #Lee la cantidad de lineas
@@ -102,10 +105,14 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
             for linea in lineas_rotor:
                 letras_rotor = linea.replace("\n", "")
 
+            letra_ventana = input("Inserte la letra de ventana 1: ")                #Pide la letra de ventana que veia el operario
+            letra = search(letra_ventana.upper(), letras_rotor)
+            rot1.seek(letra.start())
+            
             for posicion_letra in letras_rotor:                                     #Convierte la lista de letras en un diccionario
                 dic_rot_1[contador] = posicion_letra                                #El resto de la funcion hace lo mismo para los otros rotores
                 contador += 1
-    
+
     except FileNotFoundError:
         print(f"El archivo {ROTOR_1} no se ha encontrado")
         return False
@@ -121,6 +128,10 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
 
             for linea in lineas_rotor:
                 letras_rotor = linea.replace("\n", "")
+
+            letra_ventana = input("Inserte la letra de ventana 2: ")                                                                    #Convierte la lista de letras en un diccionario
+            letra = search(letra_ventana.upper(), letras_rotor)
+            rot2.seek(letra.start())
 
             for posicion_letra in letras_rotor:
                 dic_rot_2[contador] = posicion_letra
@@ -141,6 +152,10 @@ def diccionarios(): #Funcion para convertir los txt de los rotores en diccionari
 
             for linea in lineas_rotor:
                 letras_rotor = linea.replace("\n", "")
+
+            letra_ventana = input("Inserte la letra de ventana 3: ")                                                                    #Convierte la lista de letras en un diccionario
+            letra = search(letra_ventana.upper(), letras_rotor)
+            rot3.seek(letra.start())
 
             for posicion_letra in letras_rotor:
                 dic_rot_3[contador] = posicion_letra

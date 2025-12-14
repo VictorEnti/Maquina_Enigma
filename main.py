@@ -22,31 +22,31 @@ while update:
     op = input("Seleccione una opcion: ")
     print("\n")
 
-    fun.diccionarios()
-
     if op == "1":
-            fun.guardar_mensaje()
-            fun.min_mayus()
-            fun.cifrado()
+        fun.diccionarios()
+        fun.guardar_mensaje()
+        fun.min_mayus()
+        fun.cifrado()
     elif op == "2":
-            fun.descifrado()
+        fun.diccionarios()
+        fun.descifrado()
     elif op == "3":
-            elegir_rotor = input("Elige el rotor (1,2,3) que deseas editar \n(pulse cualquier otro caracter para salir): ")
-            actualizado = True
-            while actualizado:
-                if elegir_rotor =="1":
-                    fun.cargar_rotor_1()
-                    actualizado=False
-                elif elegir_rotor=="2":
-                    fun.cargar_rotor_2()
-                    actualizado=False
-                elif elegir_rotor=="3":
-                    fun.cargar_rotor_3()
-                    actualizado=False
-                else:
-                    actualizado=False
+        elegir_rotor = input("Elige el rotor (1,2,3) que deseas editar \n(pulse cualquier otro caracter para salir): ")
+        actualizado = True
+        while actualizado:
+            if elegir_rotor =="1":
+                fun.cargar_rotor_1()
+                actualizado=False
+            elif elegir_rotor=="2":
+                fun.cargar_rotor_2()
+                actualizado=False
+            elif elegir_rotor=="3":
+                fun.cargar_rotor_3()
+                actualizado=False
+            else:
+                actualizado=False
                 
     elif op == "4":
-            update = False
+        update = False
     else:
-            print("Opcion no valida \n")
+        print("Opcion no valida \n")
